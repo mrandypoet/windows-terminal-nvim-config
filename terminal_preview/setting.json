@@ -54,9 +54,9 @@
         "list": 
         [
             {
-                "colorScheme": "Frost",
+                "colorScheme": "One Half Dark",
                 "commandline": "%SystemRoot%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
-                "cursorColor": "#000000",
+                "cursorColor": "#b1baaa",
                 "elevate": false,
                 "font": 
                 {
@@ -65,7 +65,7 @@
                 "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
                 "hidden": false,
                 "name": "Windows PowerShell",
-                "opacity": 70,
+                "opacity": 85,
                 "useAcrylic": true
             },
             {
