@@ -46,5 +46,30 @@ function M.vmap(shortcut, command, opts)
   M.map('v', shortcut, command, opts)
 end
 
+function M.buf_map(bufnr, modes, shortcut, command, opts)
+  opts = get_map_options(opts)
+  modes = get_map_modes(modes)
+
+  for _, mode in ipairs(modes) do
+    buf_map(bufnr, mode, shortcut, command, opts)
+  end
+end
+
+function M.buf_nmap(bufnr, shortcut, command, opts)
+  M.buf_map(bufnr, 'n', shortcut, command, opts)
+end
+
+function M.set_options(options)
+  for key, value in pairs(options) do
+    vim.o[key] = value
+  end
+end
+
+function M.append_options(options)
+  for key, value in pairs(options) do
+    vim.opt[key]:append(value)
+  end
+end
+
 return M
 

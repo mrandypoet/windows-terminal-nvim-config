@@ -25,7 +25,7 @@
                 "action": "splitPane",
                 "split": "auto",
                 "splitMode": "duplicate"
-			},
+            },
             "keys": "ctrl+shift+d"
         },
         {
@@ -42,24 +42,24 @@
             },
             "keys": "ctrl+down"
         },
-		{ 
-			"command": 
-			{ 
-				"action": "splitPane", 
-				"split": "down",
-				"splitMode": "duplicate"
-			}, 
-			"keys": "alt+shift+-" 
-		},
-       	{ 
-		   "command": 
-		   { 
-			   "action": "splitPane", 
-			   "split": "right",
-			   "splitMode": "duplicate"
-		   }, 
-		   "keys": "alt+shift+plus" 
-	   	}
+        {
+            "command": 
+            {
+                "action": "splitPane",
+                "split": "down",
+                "splitMode": "duplicate"
+            },
+            "keys": "alt+shift+minus"
+        },
+        {
+            "command": 
+            {
+                "action": "splitPane",
+                "split": "right",
+                "splitMode": "duplicate"
+            },
+            "keys": "alt+shift+plus"
+        }
     ],
     "copyFormatting": "none",
     "copyOnSelect": false,
@@ -188,27 +188,27 @@
             "yellow": "#991070"
         },
         {
-            "background": "#282C34",
+            "background": "#17181c",
             "black": "#282C34",
-            "blue": "#61AFEF",
-			"brightBlack": "#A738C3",
-            "brightBlue": "#61AFEF",
+            "blue": "#6c99bd",
+            "brightBlack": "#743a83",
+            "brightBlue": "#3795e2",
             "brightCyan": "#56B6C2",
-            "brightGreen": "#98C379",
-            "brightPurple": "#C678DD",
+            "brightGreen": "#0ea847",
+            "brightPurple": "#aa6bbc",
             "brightRed": "#E06C75",
             "brightWhite": "#DCDFE4",
-            "brightYellow": "#E5C07B",
+            "brightYellow": "#bda475",
             "cursorColor": "#FFFFFF",
             "cyan": "#56B6C2",
-            "foreground": "#DCDFE4",
-            "green": "#98C379",
+            "foreground": "#d8d8d8",
+            "green": "#8dbf6c",
             "name": "One Half Dark",
             "purple": "#C678DD",
-            "red": "#E06C75",
-            "selectionBackground": "#FFFFFF",
+            "red": "#ca6770",
+            "selectionBackground": "#ffffff",
             "white": "#DCDFE4",
-            "yellow": "#E5C07B"
+            "yellow": "#c0a066"
         },
         {
             "background": "#FAFAFA",
@@ -349,5 +349,5 @@
             "yellow": "#808000"
         }
     ],
-    "windowingBehavior": "useAnyExisting"
+    "windowingBehavior": "useNew"
 }

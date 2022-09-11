@@ -58,6 +58,7 @@ nmap('k', 'gk')
 nmap('j', 'gj')
 nmap("H", "^")
 nmap("L", "$")
+imap('jk', '<esc>l')
 
 -- Clipboard
 vmap('<leader>x', '"+x') --cut
