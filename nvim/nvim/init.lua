@@ -1,14 +1,14 @@
-require('plugins') 
+require('plugins')
 local utils = require('utils')
 
 utils.set_options
 {
-    autochdir = true,
+	autochdir = true,
 
 	--indentation
 	autoindent = true,
 	tabstop = 4,
-	shiftwidth=4,
+	shiftwidth = 4,
 
 	--search
 	hlsearch = true,
@@ -35,7 +35,7 @@ utils.set_options
 	completeopt = 'menu,menuone,noselect',
 	updatetime = 300,
 	wildignore = '*.o,*~,*.pyc',
-  	wildmode = 'longest,full',
+	wildmode = 'longest,full',
 	wrap = false,
 }
 
@@ -73,7 +73,24 @@ nmap('<C-t>', '<cmd>tabnew<cr>') --new tab
 nmap('<leader>ch', "<cmd>noh<cr>") --clear highlight
 
 -- Misc
---nmap('<leader>s', 'ea<C-X><C-S>') -- Spellcheck
-
+nmap('<leader>s', 'ea<C-X><C-S>') -- Spellcheck
+map({ 'n', 'v', 'i' }, '<C-S>', '<cmd>w<cr>') -- Save
 vim.cmd [[
+" Make all parent directories and save the file
+augroup FileCommands
+  autocmd!
+
+  " Change the title string to just the file name
+  autocmd BufEnter * let &titlestring = expand("%:t")
+
+  " Save whenever focus is lost
+  autocmd BufLeave,FocusLost * silent! wall
+augroup END
+
+augroup autoread_load
+  au!
+  au FocusGained,BufEnter * silent! checktime
+augroup end
+
+" Vim
 ]]
