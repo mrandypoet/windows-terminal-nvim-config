@@ -1,6 +1,5 @@
 require('plugins')
 local utils = require('utils')
-
 utils.set_options
 {
 	autochdir = true,
@@ -91,6 +90,11 @@ augroup autoread_load
   au!
   au FocusGained,BufEnter * silent! checktime
 augroup end
+
+augroup set_jenkins_groovy
+  au!
+  au BufNewFile,BufRead *.jenkinsfile,*.Jenkinsfile,Jenkinsfile,jenkinsfile setf groovy
+augroup END
 
 " Vim
 ]]
