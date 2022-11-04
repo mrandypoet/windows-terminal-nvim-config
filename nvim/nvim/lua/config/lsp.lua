@@ -1,7 +1,7 @@
 require("mason").setup()
 
 require("mason-lspconfig").setup({
-	ensure_installed = { "sumneko_lua", "clangd", "cmake" }
+	ensure_installed = { "sumneko_lua", "clangd", "cmake", }
 }
 )
 
@@ -82,3 +82,10 @@ lspconfig.sumneko_lua.setup {
 }
 
 lspconfig.cmake.setup {}
+
+vim.cmd [[
+augroup lsp_actions
+  autocmd!
+  autocmd CursorHold * silent lua vim.diagnostic.open_float(nil, {underline=false, focus=false})
+augroup end
+]]
