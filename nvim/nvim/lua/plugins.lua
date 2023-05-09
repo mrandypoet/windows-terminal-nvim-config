@@ -1,10 +1,9 @@
 local packer_install_path = vim.fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
-local packer_install
 
 
 if vim.fn.empty(vim.fn.glob(packer_install_path)) > 0 then --if packer not installed, install it
 	print("packer not installed, installing parcker ...")
-	packer_install = vim.fn.system(
+	vim.fn.system(
 		{ 'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim',
 			packer_install_path }
 	)
@@ -53,8 +52,6 @@ return require('packer').startup(function(use)
 		'rmagatti/auto-session',
 		config = function()
 			require('auto-session').setup {
-				log_level = 'info',
-				auto_session_suppress_dirs = { '~/', '~/workspace' }
 			}
 		end
 	}
@@ -99,10 +96,10 @@ return require('packer').startup(function(use)
 			'hrsh7th/vim-vsnip',
 			'hrsh7th/cmp-nvim-lsp',
 			'hrsh7th/cmp-nvim-lsp-signature-help',
-			{ 'hrsh7th/cmp-buffer', after = 'nvim-cmp' },
+			{ 'hrsh7th/cmp-buffer',  after = 'nvim-cmp' },
 			{ 'hrsh7th/cmp-cmdline', after = 'nvim-cmp' },
-			{ 'hrsh7th/cmp-path', after = 'nvim-cmp' },
-			{ 'hrsh7th/cmp-vsnip', after = 'nvim-cmp' },
+			{ 'hrsh7th/cmp-path',    after = 'nvim-cmp' },
+			{ 'hrsh7th/cmp-vsnip',   after = 'nvim-cmp' },
 		},
 		config = [[require('config.cmp')]],
 	}
@@ -125,4 +122,7 @@ return require('packer').startup(function(use)
 	--ctags
 	use { "ludovicchabant/vim-gutentags" }
 
+	--latex
+	vim.g.vimtex_view_genral_viewr = 'mupdf'
+	use { 'lervag/vimtex' }
 end)

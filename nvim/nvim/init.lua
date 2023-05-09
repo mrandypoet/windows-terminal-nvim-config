@@ -27,6 +27,7 @@ utils.set_options
 	autoread = true,
 	autowrite = true,
 	backup = false,
+	swapfile = false,
 	confirm = true,
 	errorbells = false,
 	undofile = true,
@@ -58,11 +59,12 @@ nmap('j', 'gj')
 nmap("H", "^")
 nmap("L", "$")
 imap('jk', '<esc>l')
+map({ 'n', 'v' }, '<tab>', '%')
 
 -- Clipboard
-vmap('<leader>x', '"+x') --cut
-vmap('<leader>y', '"+y') --copy
-nmap('<leader>p', '"+p') --paste
+vmap('<leader>x', '"+x')   --cut
+vmap('<leader>y', '"+y')   --copy
+nmap('<leader>p', '"+p')   --paste
 nmap('<leader>a', 'ggVG$') -- Select all
 
 -- Tabs
@@ -70,10 +72,16 @@ nmap('<C-t>', '<cmd>tabnew<cr>') --new tab
 
 -- Search
 nmap('<leader>ch', "<cmd>noh<cr>") --clear highlight
+nmap('n', 'nzz')                   -- Center on search
+nmap('N', 'Nzz')
 
 -- Misc
-nmap('<leader>s', 'ea<C-X><C-S>') -- Spellcheck
+nmap('<leader>s', 'ea<C-X><C-S>')             -- Spellcheck
 map({ 'n', 'v', 'i' }, '<C-S>', '<cmd>w<cr>') -- Save
+
+vim.keymap.set('n', '<leader>ed', '<cmd>lua vim.diagnostic.enable()<cr>')
+vim.keymap.set('n', '<leader>dd', '<cmd>lua vim.diagnostic.disable()<cr>')
+
 vim.cmd [[
 " Make all parent directories and save the file
 augroup FileCommands

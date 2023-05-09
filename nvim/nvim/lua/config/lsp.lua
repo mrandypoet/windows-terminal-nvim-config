@@ -1,7 +1,7 @@
 require("mason").setup()
 
 require("mason-lspconfig").setup({
-	ensure_installed = { "sumneko_lua", "clangd", "cmake", }
+	ensure_installed = { "lua_ls", "clangd", "cmake", "jedi_language_server", "ltex" }
 }
 )
 
@@ -26,7 +26,7 @@ local function on_attach(client, bufnr)
 		vim.api.nvim_create_autocmd("BufWritePre", {
 			buffer = bufnr,
 			callback = function()
-				vim.lsp.buf.formatting_sync()
+				vim.lsp.buf.format({ async = false })
 			end,
 		})
 	end
@@ -58,7 +58,7 @@ lspconfig.clangd.setup {
 	-- offsetEncodings = 'utf-8'
 }
 
-lspconfig.sumneko_lua.setup {
+lspconfig.lua_ls.setup {
 	on_attach = on_attach,
 	capabilities = capabilities,
 	settings = {
@@ -82,6 +82,17 @@ lspconfig.sumneko_lua.setup {
 }
 
 lspconfig.cmake.setup {}
+
+lspconfig.jedi_language_server.setup {}
+
+lspconfig.ltex.setup {
+	settings = {
+		ltex = {
+			language = "en-GB",
+			completionEnabled = true,
+		}
+	}
+}
 
 vim.cmd [[
 augroup lsp_actions
