@@ -22,6 +22,13 @@
         {
             "command": 
             {
+                "action": "scrollDown"
+            },
+            "keys": "ctrl+down"
+        },
+        {
+            "command": 
+            {
                 "action": "splitPane",
                 "split": "auto",
                 "splitMode": "duplicate"
@@ -31,25 +38,18 @@
         {
             "command": 
             {
-                "action": "scrollUp"
-            },
-            "keys": "ctrl+up"
-        },
-        {
-            "command": 
-            {
-                "action": "scrollDown"
-            },
-            "keys": "ctrl+down"
-        },
-        {
-            "command": 
-            {
                 "action": "splitPane",
                 "split": "down",
                 "splitMode": "duplicate"
             },
             "keys": "alt+shift+minus"
+        },
+        {
+            "command": 
+            {
+                "action": "scrollUp"
+            },
+            "keys": "ctrl+up"
         },
         {
             "command": 
@@ -67,16 +67,25 @@
     "firstWindowPreference": "persistedWindowLayout",
     "initialCols": 180,
     "initialRows": 45,
+    "newTabMenu": 
+    [
+        {
+            "type": "remainingProfiles"
+        }
+    ],
     "profiles": 
     {
-        "defaults": {},
+        "defaults": 
+        {
+            "startingDirectory": "."
+        },
         "list": 
         [
             {
+                "backgroundImage": "C:\\Users\\jiaxing.huang\\Downloads\\wallpaperflare.com_wallpaper.jpg",
+                "backgroundImageOpacity": 0.11,
                 "colorScheme": "One Half Dark",
-                "commandline": "%SystemRoot%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
                 "cursorColor": "#B1BAAA",
-                "elevate": false,
                 "font": 
                 {
                     "face": "Cascadia Code"
@@ -188,27 +197,27 @@
             "yellow": "#991070"
         },
         {
-            "background": "#17181c",
+            "background": "#17181C",
             "black": "#282C34",
-            "blue": "#6c99bd",
-            "brightBlack": "#743a83",
-            "brightBlue": "#3795e2",
+            "blue": "#6C99BD",
+            "brightBlack": "#743A83",
+            "brightBlue": "#3795E2",
             "brightCyan": "#56B6C2",
-            "brightGreen": "#0ea847",
-            "brightPurple": "#aa6bbc",
+            "brightGreen": "#0EA847",
+            "brightPurple": "#AA6BBC",
             "brightRed": "#E06C75",
             "brightWhite": "#DCDFE4",
-            "brightYellow": "#bda475",
+            "brightYellow": "#BDA475",
             "cursorColor": "#FFFFFF",
             "cyan": "#56B6C2",
-            "foreground": "#d8d8d8",
-            "green": "#8dbf6c",
+            "foreground": "#D8D8D8",
+            "green": "#8DBF6C",
             "name": "One Half Dark",
             "purple": "#C678DD",
-            "red": "#ca6770",
-            "selectionBackground": "#ffffff",
+            "red": "#CA6770",
+            "selectionBackground": "#FFFFFF",
             "white": "#DCDFE4",
-            "yellow": "#c0a066"
+            "yellow": "#C0A066"
         },
         {
             "background": "#FAFAFA",
@@ -326,6 +335,29 @@
             "yellow": "#C4A000"
         },
         {
+            "background": "#300A24",
+            "black": "#171421",
+            "blue": "#0037DA",
+            "brightBlack": "#767676",
+            "brightBlue": "#08458F",
+            "brightCyan": "#2C9FB3",
+            "brightGreen": "#26A269",
+            "brightPurple": "#A347BA",
+            "brightRed": "#C01C28",
+            "brightWhite": "#F2F2F2",
+            "brightYellow": "#A2734C",
+            "cursorColor": "#FFFFFF",
+            "cyan": "#3A96DD",
+            "foreground": "#FFFFFF",
+            "green": "#26A269",
+            "name": "Ubuntu-ColorScheme",
+            "purple": "#881798",
+            "red": "#C21A23",
+            "selectionBackground": "#FFFFFF",
+            "white": "#CCCCCC",
+            "yellow": "#A2734C"
+        },
+        {
             "background": "#000000",
             "black": "#000000",
             "blue": "#000080",
@@ -349,5 +381,6 @@
             "yellow": "#808000"
         }
     ],
+    "themes": [],
     "windowingBehavior": "useNew"
 }
