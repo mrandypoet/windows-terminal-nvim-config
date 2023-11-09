@@ -1,9 +1,8 @@
 require("mason").setup()
 
 require("mason-lspconfig").setup({
-	ensure_installed = { "lua_ls", "clangd", "cmake", "jedi_language_server", "ltex" }
-}
-)
+	ensure_installed = { "lua_ls", "clangd", "cmake", "jedi_language_server" }
+})
 
 local lspconfig = require('lspconfig')
 local util = require('utils')
@@ -16,6 +15,7 @@ nmap(']d', '<cmd>lua vim.diagnostic.goto_next()<CR>')
 nmap('<leader>q', '<cmd>lua vim.diagnostic.setloclist()<CR>')
 
 local function on_attach(client, bufnr)
+	print("rust callback")
 	buf_nmap(bufnr, 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>')
 	buf_nmap(bufnr, 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>')
 	buf_nmap(bufnr, '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>')
@@ -54,7 +54,7 @@ lspconfig.clangd.setup {
 		completeUnimported = true,
 		semanticHighlighting = true,
 	},
-	-- offsetEncodings = 'utf-8'
+	offsetEncodings = 'utf-8'
 }
 
 lspconfig.lua_ls.setup {
@@ -84,14 +84,37 @@ lspconfig.cmake.setup {}
 
 lspconfig.jedi_language_server.setup {}
 
-lspconfig.ltex.setup {
-	settings = {
-		ltex = {
-			language = "en-GB",
-			completionEnabled = true,
+-- Rust configs
+-- local rust_tools = require('rust-tools').setup()
+lspconfig.rust_analyzer.setup {
+	on_attach = function(client, bufnr)
+		on_attach(client, bufnr)
+	end,
+	settings =
+	{
+		["rust-analyzer"] = {
+			assist = {
+				importEnforceGranularity = true,
+				importPrefix = 'crate',
+			},
+			cargo = {
+				allFeatures = true,
+			},
+			checkOnSave = {
+				command = 'clippy',
+			},
+			inlayHints = { locationLinks = false },
+			diagnostics = {
+				enable = true,
+				experimental = {
+					enable = true,
+				},
+			},
 		}
 	}
 }
+
+lspconfig.marksman.setup {}
 
 vim.cmd [[
 augroup lsp_actions

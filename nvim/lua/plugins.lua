@@ -35,6 +35,11 @@ return require('packer').startup(function(use)
 		config = [[require('config.lualine')]]
 	}
 
+	use({
+		'nvim-treesitter/nvim-treesitter-context',
+		requires = 'nvim-treesitter/nvim-treesitter'
+	})
+
 	use {
 		'nvim-treesitter/nvim-treesitter',
 		run = ':TSUpdate',
@@ -130,7 +135,6 @@ return require('packer').startup(function(use)
 	vim.g.vimtex_view_genral_viewr = 'mupdf'
 	use { 'lervag/vimtex' }
 
-	-- nvim v0.7.2
 	use({
 		"kdheepak/lazygit.nvim",
 		-- optional for floating window border decoration
@@ -142,5 +146,24 @@ return require('packer').startup(function(use)
 			require("telescope").load_extension("lazygit")
 		end,
 
+	})
+
+	use({
+		'ggandor/lightspeed.nvim',
+		config = {
+			require('lightspeed').setup {}
+		}
+	})
+
+	use({
+		"mfussenegger/nvim-dap"
+	})
+
+	use({
+		"simrat39/rust-tools.nvim",
+		require = {
+			"nvim-lua/plenary.nvim",
+			"mfussenegger/nvim-dap"
+		}
 	})
 end)

@@ -14,6 +14,20 @@ telescope.setup {
 			'env.*/.*',
 		},
 	},
+	pickers = {
+		default = {
+			layout_config = { width = 0.9 },
+			path_display = { "truncate" },
+		},
+		find_files = {
+			-- layout_config = { width = 0.6 },
+			path_display = { "truncate" },
+		},
+		buffers = {
+			-- layout_config = { width = 0.9 },
+			path_display = { "truncate" },
+		}
+	},
 	extensions = {
 		fzf = {
 			fuzzy = true,

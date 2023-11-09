@@ -122,7 +122,7 @@ end
 -- Change current dir to git root
 local function findGitRoot(startingDir)
 	local currentDir = startingDir or vim.fn.getcwd()
-	local maxTry = 4
+	local maxTry = 6
 	local currTries = 0
 	while currTries < maxTry do
 		if vim.fn.isdirectory(currentDir .. '/.git') == 1 then
@@ -146,3 +146,4 @@ function ChangeToGitRoot()
 end
 
 nmap('<leader>cr', '<Cmd>lua ChangeToGitRoot()<CR>')
+nmap('<leader>cx', '<Cmd>lua vim.cmd("cd ..")<CR>')
