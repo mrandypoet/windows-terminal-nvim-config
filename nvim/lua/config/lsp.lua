@@ -15,7 +15,6 @@ nmap(']d', '<cmd>lua vim.diagnostic.goto_next()<CR>')
 nmap('<leader>q', '<cmd>lua vim.diagnostic.setloclist()<CR>')
 
 local function on_attach(client, bufnr)
-	print("rust callback")
 	buf_nmap(bufnr, 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>')
 	buf_nmap(bufnr, 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>')
 	buf_nmap(bufnr, '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>')

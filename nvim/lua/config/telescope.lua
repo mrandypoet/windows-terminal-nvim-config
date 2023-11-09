@@ -20,11 +20,9 @@ telescope.setup {
 			path_display = { "truncate" },
 		},
 		find_files = {
-			-- layout_config = { width = 0.6 },
 			path_display = { "truncate" },
 		},
 		buffers = {
-			-- layout_config = { width = 0.9 },
 			path_display = { "truncate" },
 		}
 	},
@@ -43,7 +41,7 @@ telescope.load_extension('ag')
 
 nmap('<C-P>', '<cmd>Telescope find_files<CR>')
 nmap('<leader>b', '<cmd>Telescope buffers<CR>')
-nmap('gr', '<cmd>Telescope lsp_references<CR>')
+nmap('gr', '<cmd>Telescope lsp_references show_line=false<CR>')
 nmap('gd', '<cmd>Telescope lsp_definitions<CR>')
 nmap('<leader>v', '<cmd>Telescope lsp_document_symbols<CR>')
 nmap('<leader>d', '<cmd>Telescope diagnostics bufnr=0<CR>')
