@@ -83,8 +83,6 @@ lspconfig.cmake.setup {}
 
 lspconfig.jedi_language_server.setup {}
 
--- Rust configs
--- local rust_tools = require('rust-tools').setup()
 lspconfig.rust_analyzer.setup {
 	on_attach = function(client, bufnr)
 		on_attach(client, bufnr)
@@ -105,9 +103,9 @@ lspconfig.rust_analyzer.setup {
 			inlayHints = { locationLinks = false },
 			diagnostics = {
 				enable = true,
-				experimental = {
-					enable = true,
-				},
+				-- experimental = {
+				-- 	enable = true,
+				-- },
 			},
 		}
 	}

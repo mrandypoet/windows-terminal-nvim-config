@@ -1,0 +1,16 @@
+root=True
+
+[*]
+charset=utf-8
+indent_style=space
+end_of_line=lf
+trim_trailing_whitespace=true
+
+[*.lua]
+indent_size=2
+
+[*.md]
+textwidth=0
+wrapmargin=0
+set wrap
+set linebreak #
