@@ -13,3 +13,5 @@
 			- in linux: sudo apt install ripgrep
 
 -Use pip install nvr to enable the feature of editing file within lazygit
+
+-Powershell config location is in ~/Document/WindowsPowerShell

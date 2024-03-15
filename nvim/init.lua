@@ -60,6 +60,7 @@ nmap("H", "^")
 nmap("L", "$")
 imap('jk', '<esc>l')
 map({ 'n', 'v' }, '<tab>', '%')
+imap("{<CR>", "{<CR>}<esc>O")
 
 -- Clipboard
 vmap('<leader>x', '"+x')   --cut
@@ -68,7 +69,8 @@ nmap('<leader>p', '"+p')   --paste
 nmap('<leader>a', 'ggVG$') -- Select all
 
 -- Tabs
-nmap('<C-t>', '<cmd>tabnew<cr>') --new tab
+nmap('<C-t>', '<cmd>tabnew<cr>')   --new tab
+nmap('<C-x>', '<cmd>abclose<cr>') -- close current tab
 
 -- Search
 nmap('<leader>ch', "<cmd>noh<cr>") --clear highlight
@@ -78,13 +80,17 @@ nmap('N', 'Nzz')
 -- Misc
 nmap('<leader>s', 'ea<C-X><C-S>')             -- Spellcheck
 map({ 'n', 'v', 'i' }, '<C-S>', '<cmd>w<cr>') -- Save
-
-vim.keymap.set('n', '<leader>ed', '<cmd>lua vim.diagnostic.enable()<cr>')
-vim.keymap.set('n', '<leader>ee', '<cmd>lua vim.diagnostic.disable()<cr>')
+nmap('<leader>cr', '<Cmd>lua ChangeToGitRoot()<CR>')
+nmap('<leader>cx', '<Cmd>lua vim.cmd("cd ..")<CR>')
 
 -- cast the parentheses to the current word or selection
 nmap('<leader>cp', 'viwc()<Esc>P')
 vmap('<leader>cp', 'c()<Esc>P')
+
+-- Disable functionality
+nmap('<leader>ef', ':set eventignore=BufWritePre<cr>')
+nmap('<leader>ed', '<cmd>lua vim.diagnostic.enable()<cr>')
+nmap('<leader>ee', '<cmd>lua vim.diagnostic.disable()<cr>')
 
 vim.cmd [[
 " Make all parent directories and save the file
@@ -144,6 +150,3 @@ function ChangeToGitRoot()
 		print('No Git root directory found.')
 	end
 end
-
-nmap('<leader>cr', '<Cmd>lua ChangeToGitRoot()<CR>')
-nmap('<leader>cx', '<Cmd>lua vim.cmd("cd ..")<CR>')

@@ -81,7 +81,7 @@ lspconfig.lua_ls.setup {
 
 lspconfig.cmake.setup {}
 
-lspconfig.jedi_language_server.setup {}
+lspconfig.pyright.setup {}
 
 lspconfig.rust_analyzer.setup {
 	on_attach = function(client, bufnr)
