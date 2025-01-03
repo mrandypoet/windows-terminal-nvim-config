@@ -70,7 +70,7 @@ nmap('<leader>a', 'ggVG$') -- Select all
 
 -- Tabs
 nmap('<C-t>', '<cmd>tabnew<cr>')   --new tab
-nmap('<C-x>', '<cmd>abclose<cr>') -- close current tab
+nmap('<C-x>', '<cmd>tabclose<cr>') -- close current tab
 
 -- Search
 nmap('<leader>ch', "<cmd>noh<cr>") --clear highlight
@@ -128,7 +128,7 @@ end
 -- Change current dir to git root
 local function findGitRoot(startingDir)
 	local currentDir = startingDir or vim.fn.getcwd()
-	local maxTry = 6
+	local maxTry = 10
 	local currTries = 0
 	while currTries < maxTry do
 		if vim.fn.isdirectory(currentDir .. '/.git') == 1 then
