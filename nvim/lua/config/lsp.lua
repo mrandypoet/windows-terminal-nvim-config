@@ -4,6 +4,8 @@ require("mason-lspconfig").setup({
 	ensure_installed = { "lua_ls", "clangd", "cmake", "jedi_language_server" }
 })
 
+local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
 local lspconfig = require('lspconfig')
 local util = require('utils')
 local nmap = util.nmap
@@ -39,6 +41,7 @@ lspconfig.clangd.setup {
 		"--cross-file-rename",
 		"--header-insertion=iwyu",
 	},
+	root_dir = lspconfig.util.root_pattern('compile_commands.json', '.clangd', '.git'),
 	capabilities = capabilities,
 	on_attach = function(client, bufnr)
 		buf_nmap(bufnr, 'gh', '<cmd>ClangdSwitchSourceHeader<CR>')

@@ -1,4 +1,5 @@
 require('tokyonight').setup({
+	style = "storm",
 	styles = {
 		floats = 'normal',
 		sidebars = "normal"
