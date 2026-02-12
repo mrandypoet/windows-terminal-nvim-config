@@ -4,6 +4,9 @@ local telescope = require('telescope')
 
 telescope.setup {
 	defaults = {
+		border = true,
+		borderchars = { "─", "│", "─", "│", "┌", "┐", "┘", "└" },
+		winblend = 0,
 		mappings = {
 			i = {
 				['<ESC>'] = actions.close,
@@ -47,4 +50,5 @@ nmap('<leader>v', '<cmd>Telescope lsp_document_symbols<CR>')
 nmap('<leader>d', '<cmd>Telescope diagnostics bufnr=0<CR>')
 nmap('<leader>D', '<cmd>Telescope diagnostics<CR>')
 nmap('<leader>gs', '<cmd>Telescope grep_string<CR>')
+nmap('<leader>lg', '<cmd>Telescope live_grep<CR>')
 nmap('<leader>lg', '<cmd>Telescope live_grep<CR>')

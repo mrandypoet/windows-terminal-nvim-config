@@ -1,170 +1,231 @@
-local packer_install_path = vim.fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
+-- ~/.config/nvim/lua/plugins.lua
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 
-
-if vim.fn.empty(vim.fn.glob(packer_install_path)) > 0 then --if packer not installed, install it
-	print("packer not installed, installing parcker ...")
-	vim.fn.system(
-		{ 'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim',
-			packer_install_path }
-	)
-	print("packer installed")
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable",
+    lazypath,
+  })
 end
+vim.opt.rtp:prepend(lazypath)
 
-vim.cmd [[
-  augroup packer_user_config
-    autocmd!
-    autocmd BufWritePost plugins.lua source <afile> | PackerCompile
-  augroup end
-]]
+require("lazy").setup({
+  -- Plugin manager (optional to keep listed)
+  { "folke/lazy.nvim" },
 
-return require('packer').startup(function(use)
-	use 'wbthomason/packer.nvim'
-	use "nvim-lua/plenary.nvim"
-	use 'tpope/vim-eunuch'
-	use 'tpope/vim-fugitive'
-	use 'tpope/vim-surround'
-	use 'vim-scripts/vim-gradle'
+  -- Core deps
+  { "nvim-lua/plenary.nvim" },
 
-	use {
-		"folke/tokyonight.nvim",
-		config = [[require('config.colourScheme')]]
-	}
+  -- Classic vim plugins
+  { "tpope/vim-eunuch" },
+  { "tpope/vim-fugitive" },
+  { "tpope/vim-surround" },
+  { "vim-scripts/vim-gradle" },
 
-	use {
-		'nvim-lualine/lualine.nvim',
-		config = [[require('config.lualine')]]
-	}
+  -- Theme
+  {
+    "folke/tokyonight.nvim",
+    config = function()
+      require("config.colourScheme")
+    end,
+  },
 
-	use({
-		'nvim-treesitter/nvim-treesitter-context',
-		requires = 'nvim-treesitter/nvim-treesitter'
-	})
+  -- Statusline
+  {
+    "nvim-lualine/lualine.nvim",
+    config = function()
+      require("config.lualine")
+    end,
+  },
 
-	use {
-		'nvim-treesitter/nvim-treesitter',
-		run = ':TSUpdate',
-		config = [[require('config.treesitter')]],
-	}
+  -- Treesitter (+ context, playground)
+  {
+    "nvim-treesitter/nvim-treesitter",
+    lazy = false, -- load at startup to avoid module-not-found
+    build = ":TSUpdate",
+    config = function()
+      require("config.treesitter")
+    end,
+  },
 
-	use {
-		'nvim-treesitter/playground',
-		requires = 'nvim-treesitter/nvim-treesitter',
-	}
+  {
+    "nvim-treesitter/nvim-treesitter-context",
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
+  },
 
-	use {
-		'numToStr/Comment.nvim',
-		config = function()
-			require('Comment').setup()
-		end
-	}
-	use {
-		'rmagatti/auto-session',
-		config = function()
-			require('auto-session').setup {
-				auto_session_suppress_dirs = { "~/", "~/Projects", "~/Downloads", "/" },
-			}
-		end
-	}
+  -- Comment
+  {
+    "numToStr/Comment.nvim",
+    config = function()
+      require("Comment").setup()
+    end,
+  },
 
-	use {
-		'nvim-telescope/telescope.nvim',
-		requires = {
-			'nvim-lua/plenary.nvim',
-			'kelly-lin/telescope-ag',
-			{ 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
-		},
-		config = [[require('config.telescope')]],
-	}
+  -- Sessions
+  {
+    "rmagatti/auto-session",
+    config = function()
+      require("auto-session").setup({
+        auto_session_suppress_dirs = { "~/", "~/Projects", "~/Downloads", "/" },
+      })
+    end,
+  },
 
-	use {
-		"iamcco/markdown-preview.nvim",
-		run = function() vim.fn["mkdp#util#install"]() end,
-	}
+  -- Telescope
+  {
+    "nvim-telescope/telescope.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "kelly-lin/telescope-ag",
+      { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+    },
+    config = function()
+      require("config.telescope")
+    end,
+  },
 
-	use {
-		'editorconfig/editorconfig-vim',
-		config = [[vim.g.EditorConfig_exclude_patterns = {'fugitive://.*'}]]
-	}
+  -- Markdown preview
+  {
+    "iamcco/markdown-preview.nvim",
+    ft = { "markdown" },
+    build = "cd app && npm install",
+  },
 
-	-- Navigation
-	use {
-		'phaazon/hop.nvim',
-		config = [[require('config.hop')]],
-	}
+  -- EditorConfig
+  {
+    "editorconfig/editorconfig-vim",
+    init = function()
+      vim.g.EditorConfig_exclude_patterns = { "fugitive://.*" }
+    end,
+  },
 
-	-- Diffs
-	use {
-		'sindrets/diffview.nvim',
-		requires = 'nvim-lua/plenary.nvim',
-		config = [[require('config.diffview')]],
-	}
+  -- Navigation
+  {
+    "phaazon/hop.nvim",
+    config = function()
+      require("config.hop")
+    end,
+  },
 
-	-- Completion
-	use {
-		'hrsh7th/nvim-cmp',
-		requires = {
-			'hrsh7th/vim-vsnip',
-			'hrsh7th/cmp-nvim-lsp',
-			'hrsh7th/cmp-nvim-lsp-signature-help',
-			{ 'hrsh7th/cmp-buffer',  after = 'nvim-cmp' },
-			{ 'hrsh7th/cmp-cmdline', after = 'nvim-cmp' },
-			{ 'hrsh7th/cmp-path',    after = 'nvim-cmp' },
-			{ 'hrsh7th/cmp-vsnip',   after = 'nvim-cmp' },
-		},
-		config = [[require('config.cmp')]],
-	}
-	-- LSP
-	use {
-		"neovim/nvim-lspconfig",
-		requires = {
-			"williamboman/mason.nvim",
-			"williamboman/mason-lspconfig.nvim",
-		},
-		after = 'nvim-cmp',
-		config = [[require('config.lsp')]]
-	}
+  {
+    "folke/flash.nvim",
+    event = "VeryLazy",
+    opts = {
+      modes = {
+        search = {
+          enabled = true, -- <-- this enables labels during / and ?
+        },
+      },
+      search = {
+        multi_window = false,
+      },
+    },
+    keys = {
+      { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end },
+      { "S", mode = { "n", "x", "o" }, function() require("flash").treesitter() end },
+      { "r", mode = "o",               function() require("flash").remote() end },
+    },
+  },
 
-	use {
-		'jose-elias-alvarez/null-ls.nvim',
-		requires = 'nvim-lua/plenary.nvim',
-		config = [[require('config.null-ls')]],
-	}
-	--ctags
-	use { "ludovicchabant/vim-gutentags" }
+  -- Diffs
+  {
+    "sindrets/diffview.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    config = function()
+      require("config.diffview")
+    end,
+  },
 
-	--latex
-	vim.g.vimtex_view_genral_viewr = 'mupdf'
-	use { 'lervag/vimtex' }
+  -- Completion
+  {
+    "hrsh7th/nvim-cmp",
+    dependencies = {
+      "hrsh7th/vim-vsnip",
+      "hrsh7th/cmp-nvim-lsp",
+      "hrsh7th/cmp-nvim-lsp-signature-help",
+      "hrsh7th/cmp-buffer",
+      "hrsh7th/cmp-cmdline",
+      "hrsh7th/cmp-path",
+      "hrsh7th/cmp-vsnip",
+    },
+    config = function()
+      require("config.cmp")
+    end,
+  },
 
-	use({
-		"kdheepak/lazygit.nvim",
-		-- optional for floating window border decoration
-		requires = {
-			"nvim-telescope/telescope.nvim",
-			"nvim-lua/plenary.nvim",
-		},
-		config = function()
-			require("telescope").load_extension("lazygit")
-		end,
+  -- LSP (+ mason)
+  {
+    "neovim/nvim-lspconfig",
+    dependencies = {
+      "williamboman/mason.nvim",
+      "williamboman/mason-lspconfig.nvim",
+      "hrsh7th/cmp-nvim-lsp",
+    },
+    config = function()
+      require("config.lsp")
+    end,
+  },
 
-	})
+  -- none-ls (null-ls successor)
+  {
+    "nvimtools/none-ls.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    config = function()
+      require("config.null-ls")
+    end,
+  },
 
-	use({
-		'ggandor/lightspeed.nvim',
-		config = {
-			require('lightspeed').setup {}
-		}
-	})
+  -- ctags
+  { "ludovicchabant/vim-gutentags" },
 
-	use({
-		"mfussenegger/nvim-dap"
-	})
+  -- latex
+  {
+    "lervag/vimtex",
+    init = function()
+      -- (typo fix: genral -> general)
+      vim.g.vimtex_view_general_viewer = "mupdf"
+    end,
+  },
 
-	use({
-		"simrat39/rust-tools.nvim",
-		require = {
-			"nvim-lua/plenary.nvim",
-			"mfussenegger/nvim-dap"
-		}
-	})
-end)
+  -- LazyGit telescope extension
+  {
+    "kdheepak/lazygit.nvim",
+    dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
+    config = function()
+      require("telescope").load_extension("lazygit")
+    end,
+  },
+
+  -- DAP
+  { "mfussenegger/nvim-dap" },
+
+  -- Rust tools
+  {
+    "simrat39/rust-tools.nvim",
+    dependencies = { "nvim-lua/plenary.nvim", "mfussenegger/nvim-dap" },
+  },
+
+  -- Codex
+  {
+    "johnseth97/codex.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    config = function()
+      require("codex").setup({
+        keymaps = {
+          toggle = nil,
+          quit = "<C-q>",
+        },
+        border = "rounded",
+        width = 0.8,
+        height = 0.8,
+        autoinstall = true,
+        panel = true,
+        use_buffer = false,
+      })
+    end,
+  },
+})

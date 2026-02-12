@@ -1,47 +1,48 @@
+--leader key mapping
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '
+
 require('plugins')
 local utils = require('utils')
 utils.set_options
 {
-	autochdir = true,
+  autochdir = true,
 
-	--indentation
-	autoindent = true,
-	tabstop = 4,
-	shiftwidth = 4,
+  --indentation
+  autoindent = true,
+  tabstop = 4,
+  shiftwidth = 4,
 
-	--search
-	hlsearch = true,
-	ignorecase = true,
-	smartcase = true,
+  --search
+  hlsearch = true,
+  ignorecase = true,
+  smartcase = true,
 
-	--text rendering
-	scrolloff = 1,
+  --text rendering
+  scrolloff = 1,
 
-	--UI Options
-	number = true,
-	relativenumber = true,
-	mouse = "a",
-	laststatus = 2,
+  --UI Options
+  number = true,
+  relativenumber = true,
+  mouse = "a",
+  termguicolors = true,
+  encoding = "utf-8",
 
-	--Miscellaneous Options
-	autoread = true,
-	autowrite = true,
-	backup = false,
-	swapfile = false,
-	confirm = true,
-	errorbells = false,
-	undofile = true,
-	clipboard = "unnamedplus",
-	completeopt = 'menu,menuone,noselect',
-	updatetime = 300,
-	wildignore = '*.o,*~,*.pyc',
-	wildmode = 'longest,full',
-	wrap = false,
+  --Miscellaneous Options
+  autoread = true,
+  autowrite = true,
+  backup = false,
+  swapfile = false,
+  confirm = true,
+  errorbells = false,
+  undofile = true,
+  clipboard = "unnamedplus",
+  completeopt = 'menu,menuone,noselect',
+  updatetime = 300,
+  wildignore = '*.o,*~,*.pyc',
+  wildmode = 'longest,full',
+  wrap = false,
 }
-
---leader key mapping
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
 
 --netrw config
 --vim.g.netrw_banner = 0
@@ -92,6 +93,10 @@ nmap('<leader>ef', ':set eventignore=BufWritePre<cr>')
 nmap('<leader>ed', '<cmd>lua vim.diagnostic.enable()<cr>')
 nmap('<leader>ee', '<cmd>lua vim.diagnostic.disable()<cr>')
 
+vim.keymap.set({ "n", "t" }, "<leader>cc", function()
+  require("codex").toggle()
+end, { desc = "Toggle Codex" })
+
 vim.cmd [[
 " Make all parent directories and save the file
 augroup FileCommands
@@ -117,36 +122,33 @@ augroup END
 " Vim
 ]]
 
--- colourscheme
-vim.cmd [[colorscheme tokyonight-moon]]
-
 -- use nvim as lazygit editor
 if vim.fn.has('nvim') == 1 and vim.fn.executable('nvr') == 1 then
-	vim.env.GIT_EDITOR = "nvr -cc split --remote-wait +'set bufhidden=wipe'"
+  vim.env.GIT_EDITOR = "nvr -cc split --remote-wait +'set bufhidden=wipe'"
 end
 
 -- Change current dir to git root
 local function findGitRoot(startingDir)
-	local currentDir = startingDir or vim.fn.getcwd()
-	local maxTry = 10
-	local currTries = 0
-	while currTries < maxTry do
-		if vim.fn.isdirectory(currentDir .. '/.git') == 1 then
-			return currentDir
-		end
-		currentDir = currentDir .. "/.."
-		currTries = currTries + 1
-	end
+  local currentDir = startingDir or vim.fn.getcwd()
+  local maxTry = 10
+  local currTries = 0
+  while currTries < maxTry do
+    if vim.fn.isdirectory(currentDir .. '/.git') == 1 then
+      return currentDir
+    end
+    currentDir = currentDir .. "/.."
+    currTries = currTries + 1
+  end
 
-	return nil
+  return nil
 end
 
 function ChangeToGitRoot()
-	local gitRoot = findGitRoot()
-	if gitRoot then
-		vim.cmd('cd ' .. gitRoot)
-		print('Changed to Git root directory: ' .. gitRoot)
-	else
-		print('No Git root directory found.')
-	end
+  local gitRoot = findGitRoot()
+  if gitRoot then
+    vim.cmd('cd ' .. gitRoot)
+    print('Changed to Git root directory: ' .. gitRoot)
+  else
+    print('No Git root directory found.')
+  end
 end

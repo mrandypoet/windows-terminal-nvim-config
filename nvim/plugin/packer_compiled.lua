@@ -128,6 +128,12 @@ _G.packer_plugins = {
     path = "C:\\Users\\jiaxing.huang\\AppData\\Local\\nvim-data\\site\\pack\\packer\\opt\\cmp-vsnip",
     url = "https://github.com/hrsh7th/cmp-vsnip"
   },
+  ["codex.nvim"] = {
+    config = { "\27LJ\2\n³\1\0\0\4\0\6\0\t6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\4\0005\3\3\0=\3\5\2B\0\2\1K\0\1\0\fkeymaps\1\0\a\16autoinstall\2\vheight\4š³æÌ\t™³¦ÿ\3\vborder\frounded\nwidth\4š³æÌ\t™³¦ÿ\3\fkeymaps\0\15use_buffer\1\npanel\2\1\0\1\tquit\n<C-q>\nsetup\ncodex\frequire\0" },
+    loaded = true,
+    path = "C:\\Users\\jiaxing.huang\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\codex.nvim",
+    url = "https://github.com/johnseth97/codex.nvim"
+  },
   ["diffview.nvim"] = {
     config = { "require('config.diffview')" },
     loaded = true,
@@ -186,7 +192,7 @@ _G.packer_plugins = {
     url = "https://github.com/jose-elias-alvarez/null-ls.nvim"
   },
   ["nvim-cmp"] = {
-    after = { "nvim-lspconfig", "cmp-buffer", "cmp-cmdline", "cmp-path", "cmp-vsnip" },
+    after = { "cmp-cmdline", "cmp-path", "cmp-vsnip", "nvim-lspconfig", "cmp-buffer" },
     config = { "require('config.cmp')" },
     loaded = true,
     only_config = true,
@@ -297,46 +303,22 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
--- Config for: telescope.nvim
-time([[Config for telescope.nvim]], true)
-require('config.telescope')
-time([[Config for telescope.nvim]], false)
--- Config for: diffview.nvim
-time([[Config for diffview.nvim]], true)
-require('config.diffview')
-time([[Config for diffview.nvim]], false)
--- Config for: tokyonight.nvim
-time([[Config for tokyonight.nvim]], true)
-require('config.colourScheme')
-time([[Config for tokyonight.nvim]], false)
--- Config for: editorconfig-vim
-time([[Config for editorconfig-vim]], true)
-vim.g.EditorConfig_exclude_patterns = {'fugitive://.*'}
-time([[Config for editorconfig-vim]], false)
--- Config for: hop.nvim
-time([[Config for hop.nvim]], true)
-require('config.hop')
-time([[Config for hop.nvim]], false)
--- Config for: nvim-cmp
-time([[Config for nvim-cmp]], true)
-require('config.cmp')
-time([[Config for nvim-cmp]], false)
 -- Config for: nvim-treesitter
 time([[Config for nvim-treesitter]], true)
 require('config.treesitter')
 time([[Config for nvim-treesitter]], false)
--- Config for: lazygit.nvim
-time([[Config for lazygit.nvim]], true)
-try_loadstring("\27LJ\2\nL\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0'\2\3\0B\0\2\1K\0\1\0\flazygit\19load_extension\14telescope\frequire\0", "config", "lazygit.nvim")
-time([[Config for lazygit.nvim]], false)
 -- Config for: auto-session
 time([[Config for auto-session]], true)
 try_loadstring("\27LJ\2\n \1\0\0\4\0\6\0\t6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\4\0005\3\3\0=\3\5\2B\0\2\1K\0\1\0\31auto_session_suppress_dirs\1\0\1\31auto_session_suppress_dirs\0\1\5\0\0\a~/\15~/Projects\16~/Downloads\6/\nsetup\17auto-session\frequire\0", "config", "auto-session")
 time([[Config for auto-session]], false)
--- Config for: Comment.nvim
-time([[Config for Comment.nvim]], true)
-try_loadstring("\27LJ\2\n5\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\fComment\frequire\0", "config", "Comment.nvim")
-time([[Config for Comment.nvim]], false)
+-- Config for: lazygit.nvim
+time([[Config for lazygit.nvim]], true)
+try_loadstring("\27LJ\2\nL\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0'\2\3\0B\0\2\1K\0\1\0\flazygit\19load_extension\14telescope\frequire\0", "config", "lazygit.nvim")
+time([[Config for lazygit.nvim]], false)
+-- Config for: tokyonight.nvim
+time([[Config for tokyonight.nvim]], true)
+require('config.colourScheme')
+time([[Config for tokyonight.nvim]], false)
 -- Config for: null-ls.nvim
 time([[Config for null-ls.nvim]], true)
 require('config.null-ls')
@@ -348,12 +330,40 @@ time([[Config for lightspeed.nvim]], false)
 time([[Config for lualine.nvim]], true)
 require('config.lualine')
 time([[Config for lualine.nvim]], false)
+-- Config for: telescope.nvim
+time([[Config for telescope.nvim]], true)
+require('config.telescope')
+time([[Config for telescope.nvim]], false)
+-- Config for: nvim-cmp
+time([[Config for nvim-cmp]], true)
+require('config.cmp')
+time([[Config for nvim-cmp]], false)
+-- Config for: diffview.nvim
+time([[Config for diffview.nvim]], true)
+require('config.diffview')
+time([[Config for diffview.nvim]], false)
+-- Config for: hop.nvim
+time([[Config for hop.nvim]], true)
+require('config.hop')
+time([[Config for hop.nvim]], false)
+-- Config for: Comment.nvim
+time([[Config for Comment.nvim]], true)
+try_loadstring("\27LJ\2\n5\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\fComment\frequire\0", "config", "Comment.nvim")
+time([[Config for Comment.nvim]], false)
+-- Config for: editorconfig-vim
+time([[Config for editorconfig-vim]], true)
+vim.g.EditorConfig_exclude_patterns = {'fugitive://.*'}
+time([[Config for editorconfig-vim]], false)
+-- Config for: codex.nvim
+time([[Config for codex.nvim]], true)
+try_loadstring("\27LJ\2\n³\1\0\0\4\0\6\0\t6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\4\0005\3\3\0=\3\5\2B\0\2\1K\0\1\0\fkeymaps\1\0\a\16autoinstall\2\vheight\4š³æÌ\t™³¦ÿ\3\vborder\frounded\nwidth\4š³æÌ\t™³¦ÿ\3\fkeymaps\0\15use_buffer\1\npanel\2\1\0\1\tquit\n<C-q>\nsetup\ncodex\frequire\0", "config", "codex.nvim")
+time([[Config for codex.nvim]], false)
 -- Load plugins in order defined by `after`
 time([[Sequenced loading]], true)
-vim.cmd [[ packadd cmp-cmdline ]]
-vim.cmd [[ packadd cmp-buffer ]]
-vim.cmd [[ packadd cmp-vsnip ]]
 vim.cmd [[ packadd cmp-path ]]
+vim.cmd [[ packadd cmp-buffer ]]
+vim.cmd [[ packadd cmp-cmdline ]]
+vim.cmd [[ packadd cmp-vsnip ]]
 vim.cmd [[ packadd nvim-lspconfig ]]
 
 -- Config for: nvim-lspconfig
